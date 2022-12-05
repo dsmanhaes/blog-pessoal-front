@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Grid, makeStyles } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
+import { useParams } from 'react-router-dom';
 
 const product = {
   title: 'Camiseta simples com logo esquisita',
@@ -50,8 +51,9 @@ const style = makeStyles({
 
 function Produto() {
   const classes = style();
+  const { photoId } = useParams();
   const [qtd, setQtd] = useState(1);
-  const [opt, setOpt] = useState(0);
+  const [opt, setOpt] = useState(Number(photoId ?? 0));
 
   function setProductQtd(productQtd: number) {
     if (productQtd > 0) {
@@ -69,7 +71,7 @@ function Produto() {
         </Grid>
       </Grid>
       <Grid item xs={5}>
-        <img className={classes.mainImage} src={product.potos[opt].link} alt={product.potos[opt].alt} />
+        <img className={classes.mainImage} src={product.potos[Number(opt)].link} alt={product.potos[opt].alt} />
       </Grid>
       <Grid item xs={3}>
         <h1 className={classes.title}>{product.title}</h1>
